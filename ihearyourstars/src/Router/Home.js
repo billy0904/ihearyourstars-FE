@@ -3,7 +3,7 @@ import logo from "../img/logo.png";
 import styled from "styled-components";
 
 const Logo = styled.img`
-  width: 200px;
+  width: 250px;
 `;
 
 const DescriptionDiv = styled.div`
