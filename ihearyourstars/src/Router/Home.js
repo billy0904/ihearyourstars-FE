@@ -1,4 +1,4 @@
-import Form from "../components/Form";
+import StyledForm from "../components/Form";
 import logo from "../img/logo.png";
 import styled from "styled-components";
 
@@ -18,6 +18,13 @@ const DescriptionDiv = styled.div`
   }
 `;
 
+const DateField = styled.select`
+  padding: 10px;
+  margin: 10px;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+`;
+
 function Home() {
   return (
     <>
@@ -29,7 +36,37 @@ function Home() {
           착용 권장 최대 네 줄 정도 나오면 좋을 것 같은데 뭐라고 넣지
         </span>
       </DescriptionDiv>
-      <Form />
+
+      <StyledForm>
+        <div>
+          <span>닉네임</span>
+          <input placeholder="2~6자 이내" required></input>
+        </div>
+
+        <div>
+          <span>생일</span>
+          <DateField>
+            <option value="">월</option>
+            {Array.from({ length: 12 }, (_, i) => (
+              <option key={i} value={i + 1}>
+                {i + 1}월
+              </option>
+            ))}
+          </DateField>
+          <DateField>
+            <option value="">일</option>
+            {Array.from({ length: 31 }, (_, i) => (
+              <option key={i} value={i + 1}>
+                {i + 1}일
+              </option>
+            ))}
+          </DateField>
+        </div>
+
+        <div>
+          <span>마음에 드는 별을 골라주세요</span>
+        </div>
+      </StyledForm>
     </>
   );
 }
