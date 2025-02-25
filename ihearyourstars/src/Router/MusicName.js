@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "../components/Button";
+import StyledForm from "../components/Form";
 
 const MusicNameDiv = styled.div`
   padding: 30px 0;
@@ -16,9 +17,12 @@ const MusicNameDiv = styled.div`
 function MusicName() {
   return (
     <MusicNameDiv>
-      <span>만들어진 오르골에 이름을 붙여볼까요?</span>
-      <input placeholder="기본제목" required></input>
-      <Button text="결정"></Button>
+      <span>만들어진 오르골에</span>
+      <span>이름을 붙여볼까요?</span>
+      <StyledForm>
+        <input placeholder="기본이름" required></input>
+        <Button text="결정"></Button>
+      </StyledForm>
     </MusicNameDiv>
   );
 }
