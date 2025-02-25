@@ -9,6 +9,7 @@ const BodyWrapper = styled.div`
   background: linear-gradient(120deg, #9098fd, #ffedf3);
   text-align: center;
   padding: 50px;
+  z-index: -1;
 `;
 
 export default BodyWrapper;
