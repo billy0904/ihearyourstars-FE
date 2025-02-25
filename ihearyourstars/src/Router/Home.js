@@ -1,6 +1,16 @@
 import StyledForm from "../components/Form";
 import logo from "../img/logo.png";
 import styled from "styled-components";
+import bgEffect from "../img/bgEffect.png";
+
+const BgEffect = styled.img`
+  position: absolute;
+  top: -8%;
+  left: -20%;
+  width: 85%;
+  z-index: 0;
+  pointer-events: none;
+`;
 
 const Logo = styled.img`
   width: 250px;
@@ -28,6 +38,7 @@ const DateField = styled.select`
 function Home() {
   return (
     <>
+      <BgEffect src={bgEffect} />
       <Logo src={logo} />
       <DescriptionDiv>
         <span>
