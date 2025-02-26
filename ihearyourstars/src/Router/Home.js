@@ -41,6 +41,12 @@ const DateField = styled.select`
   padding: 10px;
   margin: 10px;
   background-color: transparent;
+  color: white;
+  & option {
+    color: black;
+  }
+`;
+
 `;
 
 function Home() {
