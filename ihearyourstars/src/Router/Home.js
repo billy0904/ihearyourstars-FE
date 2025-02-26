@@ -65,7 +65,12 @@ function Home() {
       <StyledForm>
         <div>
           <span>닉네임</span>
-          <input placeholder="2~6자 이내" required></input>
+          <input
+            placeholder="2~6자 이내"
+            required
+            minLength={1}
+            maxLength={5}
+          ></input>
           <Line src={line}></Line>
         </div>
 
