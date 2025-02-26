@@ -1,6 +1,7 @@
 import StyledForm from "../components/Form";
 import logo from "../img/logo.png";
 import styled from "styled-components";
+import line from "../img/line.png";
 import bgEffect from "../img/bgEffect.png";
 
 const BgEffect = styled.img`
@@ -28,10 +29,17 @@ const DescriptionDiv = styled.div`
   }
 `;
 
+const Line = styled.img`
+  width: 110%;
+  position: absolute;
+  top: 11%;
+  left: -11%;
+  pointer-events: none;
+`;
+
 const DateField = styled.select`
   padding: 10px;
   margin: 10px;
-  border-bottom: 1px solid white;
   background-color: transparent;
 `;
 
@@ -52,6 +60,7 @@ function Home() {
         <div>
           <span>닉네임</span>
           <input placeholder="2~6자 이내" required></input>
+          <Line src={line}></Line>
         </div>
 
         <div>
@@ -72,10 +81,13 @@ function Home() {
               </option>
             ))}
           </DateField>
+          <Line src={line}></Line>
         </div>
 
         <div>
           <span>마음에 드는 별을 골라주세요</span>
+          <Line src={line}></Line>
+        </div>
         </div>
       </StyledForm>
     </>
