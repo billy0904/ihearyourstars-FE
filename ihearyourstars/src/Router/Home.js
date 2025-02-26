@@ -77,7 +77,8 @@ function Home() {
         <div>
           <span>생일</span>
           <DateField>
-            <option value="">월</option>
+            <option value="" disabled>
+              월
             {Array.from({ length: 12 }, (_, i) => (
               <option key={i} value={i + 1}>
                 {i + 1}월
@@ -85,7 +86,9 @@ function Home() {
             ))}
           </DateField>
           <DateField>
-            <option value="">일</option>
+            <option value="" disabled>
+              일
+            </option>
             {Array.from({ length: 31 }, (_, i) => (
               <option key={i} value={i + 1}>
                 {i + 1}일
