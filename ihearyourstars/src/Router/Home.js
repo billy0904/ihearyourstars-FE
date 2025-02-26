@@ -1,3 +1,4 @@
+import StyledButton from "../components/Button";
 import StyledForm from "../components/Form";
 import logo from "../img/logo.png";
 import styled from "styled-components";
@@ -185,6 +186,8 @@ function Home() {
           </StarsContainer>
         </div>
 
+        <div>
+            <StyledButton>완료</StyledButton>
         </div>
       </StyledForm>
     </>
