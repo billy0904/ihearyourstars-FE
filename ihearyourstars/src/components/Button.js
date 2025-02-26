@@ -14,7 +14,7 @@ const StyledButton = styled.button`
 function Button(props) {
   return (
     <>
-      <StyledButton>{props.text}</StyledButton>
+      <StyledButton onClick={props.onClick}>{props.text}</StyledButton>
     </>
   );
 }

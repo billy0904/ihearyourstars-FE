@@ -1,10 +1,17 @@
 import styled from "styled-components";
 import Button from "../components/Button";
 import { ReactComponent as CircleBg } from "../img/common/circle_bg.svg";
+import { useNavigate } from 'react-router-dom';
 
 function Musicbox() {
   const userName = "가빈";
   const musicTitle = "집에가고싶다";
+
+  const nav = useNavigate();
+
+  const handleNavigateHome = () => {
+    nav('/');
+  }
 
   return (
     <MusicboxTitleDiv>
@@ -16,7 +23,7 @@ function Musicbox() {
               <CircleBg />
               <Text>오르골을 눌러 노래를 들어보세요</Text>
             </Contents>
-      <Button text="나도 만들기"></Button>
+      <Button text="나도 만들기" onClick={handleNavigateHome}></Button>
     </MusicboxTitleDiv>
   );
 }
