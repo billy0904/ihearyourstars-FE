@@ -19,4 +19,5 @@ function Button(props) {
     </>
   );
 }
-export default StyledButton;
+
+export default Button;

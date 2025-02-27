@@ -1,11 +1,12 @@
-import StyledButton from "../components/Button";
+import React, { useState } from "react";
+import Button from "../components/Button";
 import StyledForm from "../components/Form";
-import logo from "../img/logo.png";
+import logo from "../img/common/logo.png";
 import styled from "styled-components";
-import line from "../img/line.png";
+import line from "../img/form/line.png";
 import bgEffect from "../img/bgEffect.png";
-import starIcon from "../img/star.png";
-import selectedStarIcon from "../img/selectedStar.png";
+import starIcon from "../img/form/star.png";
+import selectedStarIcon from "../img/form/selectedStar.png";
 
 const BgEffect = styled.img`
   position: absolute;
@@ -187,7 +188,7 @@ function Home() {
         </div>
 
         <div>
-            <StyledButton>완료</StyledButton>
+          <Button text="완료" type="submit"></Button>
         </div>
       </StyledForm>
     </>
