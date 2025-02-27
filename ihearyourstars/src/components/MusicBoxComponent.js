@@ -4,7 +4,7 @@ import { ReactComponent as Body } from "../img/MusicBox/musicbox_play.svg"
 import { ReactComponent as Star } from "../img/MusicBox/musicbox_star.svg"
 import { ReactComponent as Handle } from "../img/MusicBox/musicbox_handle.svg"
 
-export const MusicBox = () => {
+export const MusicBoxComponent = () => {
 
     const [rotation, setRotation] = useState(0);
     const handleRef = useRef(null);

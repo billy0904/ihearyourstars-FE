@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { MusicBox } from '../components/MusicBox';
+import { MusicBoxComponent } from '../components/MusicBoxComponent';
 import { ReactComponent as Body } from "../img/MusicBox/musicbox_play.svg"
 import { ReactComponent as Star } from "../img/MusicBox/musicbox_star.svg"
 import { ReactComponent as Handle } from "../img/MusicBox/musicbox_handle.svg"
@@ -13,7 +13,7 @@ function MusicboxPlay() {
         <h1>♪ 집에가고싶다</h1>
       </Title>
       <Notes />
-      <MusicBox />
+      <MusicBoxComponent />
       <span>손잡이를 돌려 음악을 재생해보세요</span>
     </MusicboxPlayDiv>
   );
