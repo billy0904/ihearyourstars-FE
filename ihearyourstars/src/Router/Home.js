@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import StyledForm from "../components/Form";
+import Line from "../components/Line";
 import logo from "../img/common/logo.png";
 import styled from "styled-components";
-import line from "../img/form/line.png";
 import { ReactComponent as CircleBg } from "../img/common/circle_bg.svg";
 import starIcon from "../img/form/star.png";
 import selectedStarIcon from "../img/form/selectedStar.png";
@@ -31,14 +31,6 @@ const DescriptionDiv = styled.div`
     font-weight: 500;
     font-size: 14px;
   }
-`;
-
-const Line = styled.img`
-  width: 110%;
-  position: absolute;
-  top: 11%;
-  left: -11%;
-  pointer-events: none;
 `;
 
 const DateField = styled.select`
@@ -152,7 +144,7 @@ function Home() {
             maxLength={6}
             onChange={(e) => setNickname(e.target.value)}
           ></input>
-          <Line src={line}></Line>
+          <Line />
         </div>
 
         <div>
@@ -185,12 +177,12 @@ function Home() {
               </option>
             ))}
           </DateField>
-          <Line src={line}></Line>
+          <Line />
         </div>
 
         <div>
           <span>마음에 드는 별을 골라주세요</span>
-          <Line src={line}></Line>
+          <Line />
         </div>
         <div>
           <StarsContainer>
