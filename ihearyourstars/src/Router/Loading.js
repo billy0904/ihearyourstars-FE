@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 const LoadingDiv = styled.div`
-  padding: 100px 0;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   span {
     display: block;
     width: 100%;
