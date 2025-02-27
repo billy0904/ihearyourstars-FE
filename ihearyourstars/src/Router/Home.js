@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import StyledForm from "../components/Form";
 import logo from "../img/common/logo.png";
@@ -97,6 +98,9 @@ const StarsEffect = styled.img`
 `;
 
 function Home() {
+  const [nickname, setNickname] = useState("");
+  const [month, setMonth] = useState("");
+  const [day, setDay] = useState("");
   const [selectedStar, setSelectedStar] = useState(null);
 
   const starsData = [
@@ -111,6 +115,20 @@ function Home() {
     setSelectedStar(star);
   };
 
+  const nav = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // 유효성 검사
+    if (!selectedStar) {
+      alert("마음에 드는 별을 골라주세요.");
+      return;
+    }
+
+    nav("/loading");
+  };
+
   return (
     <>
       <BgEffect />
@@ -123,21 +141,27 @@ function Home() {
         </span>
       </DescriptionDiv>
 
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
         <div>
           <span>닉네임</span>
           <input
+            value={nickname}
             placeholder="2~6자 이내"
             required
-            minLength={1}
-            maxLength={5}
+            minLength={2}
+            maxLength={6}
+            onChange={(e) => setNickname(e.target.value)}
           ></input>
           <Line src={line}></Line>
         </div>
 
         <div>
           <span>생일</span>
-          <DateField>
+          <DateField
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+            required
+          >
             <option value="" disabled>
               월
             </option>
@@ -147,7 +171,11 @@ function Home() {
               </option>
             ))}
           </DateField>
-          <DateField>
+          <DateField
+            value={day}
+            onChange={(e) => setDay(e.target.value)}
+            required
+          >
             <option value="" disabled>
               일
             </option>
