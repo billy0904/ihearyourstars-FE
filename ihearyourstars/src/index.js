@@ -10,6 +10,14 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: '국립박물관문화재단클래식M';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/국립박물관문화재단클래식M.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -73,6 +81,9 @@ button {
     border: none;
     background: none;
   }
+h1, h2 {
+  font-family: '국립박물관문화재단클래식M', serif;
+}
 `;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

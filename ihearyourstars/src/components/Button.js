@@ -12,4 +12,11 @@ const StyledButton = styled.button`
   margin-top: 30px;
 `;
 
+function Button(props) {
+  return (
+    <>
+      <StyledButton onClick={props.onClick}>{props.text}</StyledButton>
+    </>
+  );
+}
 export default StyledButton;
