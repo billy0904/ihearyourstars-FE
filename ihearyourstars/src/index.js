@@ -81,8 +81,16 @@ button {
     border: none;
     background: none;
   }
-h1, h2 {
+h1 {
   font-family: '국립박물관문화재단클래식M', serif;
+  color: white;
+  font-weight: 400;
+  line-height: 40px;
+  font-size: 32px;
+}
+h2 {
+  font-family: '국립박물관문화재단클래식M', serif;
+  color: white;
 }
 `;
 

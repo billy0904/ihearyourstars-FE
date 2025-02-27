@@ -6,21 +6,13 @@ const LoadingDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  span {
-    display: block;
-    width: 100%;
-    background-color: transparent;
-    color: white;
-    font-weight: 500;
-    font-size: 30px;
-  }
 `;
 
 function Loading() {
   return (
     <LoadingDiv>
-      <span>나의 오르골을</span>
-      <span>만드는 중이에요</span>
+      <h1>나의 오르골을</h1>
+      <h1>만드는 중이에요</h1>
     </LoadingDiv>
   );
 }
