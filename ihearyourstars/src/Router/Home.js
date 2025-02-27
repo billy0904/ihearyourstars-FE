@@ -113,7 +113,7 @@ function Home() {
 
   return (
     <>
-      <BgEffect src={bgEffect} />
+      <BgEffect />
       <Logo src={logo} />
       <DescriptionDiv>
         <span>
