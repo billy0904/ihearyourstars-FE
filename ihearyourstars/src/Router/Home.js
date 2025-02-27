@@ -1,4 +1,4 @@
-import StyledButton from "../components/Button";
+import Button from "../components/Button";
 import StyledForm from "../components/Form";
 import logo from "../img/logo.png";
 import styled from "styled-components";
@@ -187,7 +187,7 @@ function Home() {
         </div>
 
         <div>
-            <StyledButton>완료</StyledButton>
+          <Button text="완료" type="submit"></Button>
         </div>
       </StyledForm>
     </>
