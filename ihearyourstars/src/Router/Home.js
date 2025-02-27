@@ -1,6 +1,6 @@
 import Button from "../components/Button";
 import StyledForm from "../components/Form";
-import logo from "../img/logo.png";
+import logo from "../img/common/logo.png";
 import styled from "styled-components";
 import line from "../img/line.png";
 import bgEffect from "../img/bgEffect.png";
