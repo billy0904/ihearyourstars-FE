@@ -4,15 +4,14 @@ import StyledForm from "../components/Form";
 import logo from "../img/common/logo.png";
 import styled from "styled-components";
 import line from "../img/form/line.png";
-import bgEffect from "../img/bgEffect.png";
+import { ReactComponent as CircleBg } from "../img/common/circle_bg.svg";
 import starIcon from "../img/form/star.png";
 import selectedStarIcon from "../img/form/selectedStar.png";
 
-const BgEffect = styled.img`
+const BgEffect = styled(CircleBg)`
   position: absolute;
-  top: -8%;
-  left: -20%;
-  width: 85%;
+  top: -5%;
+  left: -15%;
   z-index: 0;
   pointer-events: none;
 `;
