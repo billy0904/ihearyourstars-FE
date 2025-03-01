@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ReactComponent as Sparkle } from "../img/Sparkle.svg";
 import { useState } from "react";
 
@@ -22,6 +22,12 @@ const SparklesWrapper = styled.div`
   z-index: 10;
 `;
 
+const fadeAnimation = keyframes`
+  0% { opacity: 0; transform: scale(0.5); }
+  15% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(0.8); }
+`;
+
 const CreatedSparkle = styled(Sparkle)`
   position: absolute;
   left: ${(props) => props.x}px;
@@ -29,6 +35,7 @@ const CreatedSparkle = styled(Sparkle)`
   width: 60px;
   height: 60px;
   pointer-events: none;
+  animation: ${fadeAnimation} 3s ease-out forwards;
 `;
 
 function Loading() {
