@@ -67,6 +67,7 @@ export const MusicBoxComponent = () => {
 const MusicBoxDiv = styled.div`
     position: relative;
     width: 430px;
+    margin-left: 40px;
 `;
 
 const floatAnimation = keyframes`
