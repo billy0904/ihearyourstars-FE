@@ -91,6 +91,7 @@ h1 {
 h2 {
   font-family: '국립박물관문화재단클래식M', serif;
   color: white;
+  font-size: 25px;
 }
 `;
 
