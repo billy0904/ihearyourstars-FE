@@ -21,7 +21,7 @@ const MusicboxWrapper = styled.div`
 `;
 
 function MusicName() {
-  const [musicboxName, setMusicboxName] = useState("가빈의 오르골");
+  const [musicboxName, setMusicboxName] = useState("가빈의 별들");
 
   const nav = useNavigate();
 
