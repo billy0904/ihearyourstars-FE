@@ -96,11 +96,11 @@ function Home() {
   const [selectedStar, setSelectedStar] = useState(null);
 
   const starsData = [
-    { name: "베텔기우스", color: "#FFCBE4" },
-    { name: "시리우스", color: "#D5FBFF" },
-    { name: "폴라리스", color: "#ffffff" },
-    { name: "알타이르", color: "rgba(255, 226, 203)" },
-    { name: "베가", color: "#D0FFE4" },
+    { name: "Antares", color: "#FFCBE4" },
+    { name: "Sirius", color: "#D5FBFF" },
+    { name: "Polaris", color: "#ffffff" },
+    { name: "Capella", color: "rgba(255, 226, 203)" },
+    { name: "Vega", color: "#D0FFE4" },
   ];
 
   const handleStarClick = (star) => {
