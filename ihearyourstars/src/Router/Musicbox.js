@@ -1,11 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Button from "../components/Button";
-import { ReactComponent as CircleBg } from "../img/common/circle_bg.svg";
-import { useNavigate } from "react-router-dom";
+import { ReactComponent as Musicbox1 } from "../img/share/share_musicbox1.svg";
+import { ReactComponent as Star } from "../img/MusicBox/musicbox_star.svg"
+import { useNavigate } from 'react-router-dom';
 
 function Musicbox() {
   const userName = "가빈";
   const musicTitle = "안녕하시렵니까별들";
+  const songId = "12345";
 
   const nav = useNavigate();
 
@@ -13,17 +15,28 @@ function Musicbox() {
     nav("/");
   };
 
+  const handleNavigatePlay = () => {
+    nav('/musicbox/play');
+  }
+
   return (
     <MusicboxTitleDiv>
       <Contents>
         <Title>
-          <h2>{userName} 님의 오르골</h2>
-          <h1>{musicTitle}</h1>
+          <h1>{userName} 님의 오르골</h1>
+          <h1>"{musicTitle}"</h1>
         </Title>
-        <CircleBg />
+        <MusicBoxDiv onClick={handleNavigatePlay}>
+          <StarDiv>
+            <Star />
+          </StarDiv>
+          <Musicbox1 />
+        </MusicBoxDiv>
         <Text>오르골을 눌러 노래를 들어보세요</Text>
       </Contents>
-      <Button text="나도 만들기" onClick={handleNavigateHome}></Button>
+      <Buttons>
+        <Button text="나도 만들기" onClick={handleNavigateHome}></Button>
+      </Buttons>
     </MusicboxTitleDiv>
   );
 }
@@ -31,11 +44,10 @@ function Musicbox() {
 const MusicboxTitleDiv = styled.div`
   position: relative;
   padding: 30px 0;
-  span {
-    display: block;
-    width: 100%;
-    background-color: transparent;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Title = styled.div`
@@ -46,11 +58,18 @@ const Title = styled.div`
   gap: 16px;
 `;
 
+const blinkAnimation = keyframes`
+  0% { opacity: 0.3; }
+  50% { opacity: 0.5; }
+  100% { opacity: 0.3; }
+`;
+
 const Text = styled.div`
   color: rgba(0, 0, 0, 0.5);
   font-weight: 400;
   line-height: 20px;
   font-size: 15px;
+  animation: ${blinkAnimation} 3s infinite ease-in-out;
 `;
 
 const Contents = styled.div`
@@ -60,6 +79,33 @@ const Contents = styled.div`
   align-items: center;
   gap: 47px;
   margin-bottom: 62px;
+`;
+
+const MusicBoxDiv = styled.div`
+  position: relative;
+  cursor: pointer;
+  width: 430px;
+`;
+
+const floatAnimation = keyframes`
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-7%); }
+    100% { transform: translateY(0); }
+`;
+
+const StarDiv = styled.div`
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    z-index: 1;
+    animation: ${floatAnimation} 3s infinite ease-in-out;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+
 `;
 
 export default Musicbox;
