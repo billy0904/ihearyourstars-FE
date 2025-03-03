@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { ReactComponent as Orbit } from "../img/MusicBox/orbit.svg";
 import { ReactComponent as Circle } from "../img/common/circle_bg.svg";
 import { ReactComponent as Cloud } from "../img/MusicBox/cloud.svg";
@@ -50,7 +50,7 @@ const CloudBg = styled(Cloud)`
   pointer-events: none;
 `;
 
-const scaleUp = keyframes`
+const scaleUpAnimation = keyframes`
   0% { transform: scale(1); }
   100% { transform: scale(1.7); }
 `;
@@ -59,8 +59,8 @@ const StyledMusicboxTop = styled(MusicboxTop)`
   z-index: 6;
   position: absolute;
   top: 45%;
-  left: 37%;
-  animation: ${({ isScaled }) => (isScaled ? scaleUp : "none")} 0.85s
+  left: 38%;
+  animation: ${({ isScaled }) => (isScaled ? scaleUpAnimation : "none")} 0.85s
     ease-in-out forwards;
 `;
 
@@ -69,49 +69,40 @@ const StyledMusicboxBottom = styled(MusicboxBottom)`
   position: absolute;
   top: 50%;
   left: 17%;
-  animation: ${({ isScaled }) => (isScaled ? scaleUp : "none")} 0.85s
+  animation: ${({ isScaled }) => (isScaled ? scaleUpAnimation : "none")} 0.85s
     ease-in-out forwards;
 `;
 
-const starDrop1 = keyframes`
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  33% { transform: translate(-1.6px, 25px) scale(0.95) rotate(120deg); }
-  66% { transform: translate(-3.2px, 50px) scale(0.9) rotate(240deg); }
-  100% { transform: translate(-5px, 80px) scale(0.85) rotate(360deg); }
+const floatAnimation = keyframes`
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-7%); }
+    100% { transform: translateY(0); }
 `;
 
-const starDrop2 = keyframes`
+const DropAnimation = keyframes`
   0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  33% { transform: translate(-40px, 30px) scale(0.95) rotate(240deg); }
-  66% { transform: translate(-80px, 75px) scale(0.9) rotate(480deg); }
-  100% { transform: translate(-95px, 110px) scale(0.85) rotate(720deg); }
+  33% { transform: translate(3px, 16px) scale(0.85) rotate(240deg); }
+  66% { transform: translate(6px, 40px) scale(0.7) rotate(480deg); }
+  100% { transform: translate(9px, 65px) scale(0.55) rotate(720deg); }
 `;
 
 const StyledStar = styled(Star)`
   z-index: 5;
   position: absolute;
-  width: 70px;
-`;
-
-const StyledStar1 = styled(StyledStar)`
-  top: 20%;
-  left: 30%;
-  transform-origin: center;
-  animation: ${({ isClicked }) => (isClicked ? starDrop1 : "none")} 0.4s
-    ease-in-out forwards;
-`;
-
-const StyledStar2 = styled(StyledStar)`
-  top: 5%;
-  left: 65%;
-  transform-origin: center;
-  animation: ${({ isClicked }) => (isClicked ? starDrop2 : "none")} 0.4s
-    ease-in-out forwards;
+  left: 15%;
+  top: 25%;
+  animation: ${({ isClicked }) =>
+    isClicked
+      ? css`
+          ${DropAnimation} 0.4s ease-in-out forwards
+        `
+      : css`
+          ${floatAnimation} 3s infinite ease-in-out
+        `};
 `;
 
 const fadeInOut = keyframes`
   0% { opacity: 0; }
-  10% { opacity: 0; }
   100% { opacity: 0.9; }
 `;
 
@@ -143,7 +134,7 @@ function Music() {
 
     setTimeout(() => {
       setIsScaled(!isScaled);
-    }, 400);
+    }, 350);
 
     setTimeout(() => {
       nav("/music/play");
@@ -161,8 +152,7 @@ function Music() {
           <CloudBg />
           <StyledMusicboxTop isScaled={isScaled} />
           <StyledMusicboxBottom isScaled={isScaled} />
-          <StyledStar1 isClicked={isClicked} isScaled={isScaled} />
-          <StyledStar2 isClicked={isClicked} isScaled={isScaled} />
+          <StyledStar isClicked={isClicked} isScaled={isScaled} />
         </MusicBoxBg>
 
         <span>오르골을 눌러 음악을 들어보세요</span>
