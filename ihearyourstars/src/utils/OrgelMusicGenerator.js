@@ -32,8 +32,8 @@ export async function generateOrgelMelody(nickname, birth, starNum) {
                 let time = `${timeCounter}n`;
 
                 melody.push({ time, note, duration });
-                if (duration == 'd4') timeCounter += 3;
-                else if (duration == 'q') timeCounter += 2;
+                if (duration === 'd4') timeCounter += 3;
+                else if (duration === 'q') timeCounter += 2;
                 else timeCounter += 1;
                 noteIndex++;
             });
