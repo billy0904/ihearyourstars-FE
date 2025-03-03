@@ -22,7 +22,7 @@ const MusicboxWrapper = styled.div`
 `;
 
 function MusicName() {
-  const [title, setTitle] = useState("가빈의 별들");
+  const [title, setTitle] = useState("");
 
   const nav = useNavigate();
   const location = useLocation();
@@ -42,6 +42,7 @@ function MusicName() {
   
     // 제목 변경
     await updateSongTitle(songId, title);
+    
     nav(`/music/share/${songId}`, { state: { title } });
   };
   

@@ -23,8 +23,8 @@ export async function saveOrgelMelody(nickname, birth, starNum, melody, title) {
 }
 
 // 특정 song_id로 곡 조회
-export async function fetchSongById(song_id) {
-    if (!song_id) {
+export async function fetchSongById(songId) {
+    if (!songId) {
         console.error("song_id가 제공되지 않았습니다.");
         return null;
     }
@@ -32,7 +32,7 @@ export async function fetchSongById(song_id) {
     const { data, error } = await supabase
         .from("songs")
         .select("nickname, title, notes")
-        .eq("song_id", song_id)
+        .eq("song_id", String(songId))
         .single();
 
     if (error) {
@@ -44,20 +44,19 @@ export async function fetchSongById(song_id) {
 }
 
 // song_id에 해당하는 곡의 title 변경
-export async function updateSongTitle(song_id, newTitle) {
-    if (!song_id || !newTitle) {
+export async function updateSongTitle(songId, newTitle) {
+    if (!songId || !newTitle) {
         console.error("song_id 또는 newTitle이 제공되지 않았습니다.");
         return null;
     }
-
-    const { data, error } = await supabase
+    
+    const { error } = await supabase
         .from("songs")
         .update({ title: newTitle })
-        .eq("song_id", song_id);
+        .eq("song_id", songId);
 
     if (error) {
         console.error("곡 제목 변경 실패:", error);
-        alert("곡 제목 변경에 실패했습니다.");
         return null;
     }
     console.log("곡 제목을 변경했습니다.");
