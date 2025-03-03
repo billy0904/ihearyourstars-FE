@@ -9,7 +9,7 @@ export async function saveOrgelMelody(nickname, birth, starNum, melody, title) {
 
     const { data, error } = await supabase
         .from("songs")
-        .insert([{ nickname, birth, star_num: starNum, melody: melody, title }])
+        .insert([{ nickname, birth, star_num: starNum, notes: melody, title }])
         .select("song_id")
         .single();
 
