@@ -4,7 +4,7 @@ import StyledForm from "../components/Form";
 import Line from "../components/Line";
 import { useState } from "react";
 import { ReactComponent as Musicbox } from "../img/MusicBox/Musicbox.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 const MusicNameDiv = styled.div`
   padding: 30px 0;

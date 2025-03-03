@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 const MusicPlayDiv = styled.div`
   padding: 30px 0;
@@ -8,8 +8,8 @@ const MusicPlayDiv = styled.div`
 function MusicPlay() {
   const nav = useNavigate();
   const location = useLocation();
+  const { nickname, melody } = location.state || {};
   const { songId } = useParams();
-  const { melody } = location.state || {};
   
   return (
     <MusicPlayDiv>

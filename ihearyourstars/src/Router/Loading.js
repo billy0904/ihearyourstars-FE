@@ -62,7 +62,7 @@ function Loading() {
       }
 
       // Music 페이지로 이동 (멜로디 데이터 전달)
-        nav("/music/${songId}", { state: { nickname, melody: JSON.stringify(melody) } });
+        nav(`/music/${songId}`, { state: { nickname, melody: JSON.stringify(melody) } });
     } catch (error) {
       console.error(error);
       alert("오류가 발생했습니다.");

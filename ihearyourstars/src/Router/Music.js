@@ -6,7 +6,7 @@ import { ReactComponent as MusicboxTop } from "../img/MusicBox/Musicbox_top.svg"
 import { ReactComponent as MusicboxBottom } from "../img/MusicBox/Musicbox_bottom.svg";
 import { ReactComponent as Star } from "../img/MusicBox/Star.svg";
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 const MusicDiv = styled.div`
   padding: 30px 0;
@@ -136,8 +136,8 @@ function Music() {
 
   const nav = useNavigate();
   const location = useLocation();
-  const { songId } = useParams()
   const { nickname, melody } = location.state || {};
+  const { songId } = useParams()
 
   // melody를 JSON으로 파싱
   const parsedMelody = melody ? JSON.parse(melody) : [];
@@ -151,7 +151,7 @@ function Music() {
     }, 400);
 
     setTimeout(() => {
-      nav("/music/play/${songId}", { state: { melody } });
+      nav(`/music/play/${songId}`, { state: { nickname, melody } });
     }, 1000);
   };
 

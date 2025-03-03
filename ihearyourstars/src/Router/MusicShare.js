@@ -3,14 +3,14 @@ import Button from "../components/Button";
 import { ReactComponent as Musicbox1 } from "../img/share/share_musicbox1.svg";
 import { ReactComponent as Star } from "../img/MusicBox/musicbox_star.svg"
 import { ReactComponent as Orbit } from "../img/MusicBox/orbit.svg";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 function MusicShare() {
 
   const nav = useNavigate();
   const location = useLocation();
-  const { songId } = useParams();
   const { musicTitle } = location.state || {};
+  const { songId } = useParams();
 
   const handleCopyLink = async () => {
     const baseUrl = window.location.origin;
