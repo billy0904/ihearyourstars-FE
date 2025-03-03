@@ -136,7 +136,8 @@ function Music() {
 
   const nav = useNavigate();
   const location = useLocation();
-  const { songId, nickname, melody } = location.state || {};
+  const { songId } = useParams()
+  const { nickname, melody } = location.state || {};
 
   // melody를 JSON으로 파싱
   const parsedMelody = melody ? JSON.parse(melody) : [];
@@ -150,7 +151,7 @@ function Music() {
     }, 400);
 
     setTimeout(() => {
-      nav("/music/play", { state: { songId, melody } });
+      nav("/music/play/${songId}", { state: { melody } });
     }, 1000);
   };
 

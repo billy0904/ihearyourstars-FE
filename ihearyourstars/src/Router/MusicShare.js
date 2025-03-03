@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 function MusicShare() {
 
-  const musicTitle = "집에가고싶다";
-  const songId = "12345";
-
   const nav = useNavigate();
+  const location = useLocation();
+  const { songId } = useParams();
+  const { musicTitle } = location.state || {};
 
   const handleCopyLink = async () => {
     const baseUrl = window.location.origin;

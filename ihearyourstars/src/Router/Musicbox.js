@@ -16,7 +16,7 @@ function Musicbox() {
   };
 
   const handleNavigatePlay = () => {
-    nav('/musicbox/play');
+    nav("/musicbox/play/${songId}", { state: { melody } });
   }
 
   return (

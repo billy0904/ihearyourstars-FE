@@ -22,13 +22,13 @@ function MainContent() {
   return (
     <BodyWrapper isLoading={isLoading}>
       <Routes>
-        <Route path="/music/share" element={<MusicShare />} />
-        <Route path="/music/name" element={<MusicName />} />
-        <Route path="/music/play" element={<MusicPlay />} />
-        <Route path="/music" element={<Music />} />
+        <Route path="/music/share/:songId" element={<MusicShare />} />
+        <Route path="/music/name/:songId" element={<MusicName />} />
+        <Route path="/music/play/:songId" element={<MusicPlay />} />
+        <Route path="/music/:songId" element={<Music />} />
 
-        <Route path="/musicbox/play" element={<MusicboxPlay />} />
-        <Route path="/musicbox" element={<Musicbox />} />
+        <Route path="/musicbox/play/:songId" element={<MusicboxPlay />} />
+        <Route path="/musicbox/:songId" element={<Musicbox />} />
 
         <Route path="/loading" element={<Loading />} />
         <Route path="/" element={<Home />} />

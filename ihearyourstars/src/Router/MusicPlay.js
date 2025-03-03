@@ -8,7 +8,8 @@ const MusicPlayDiv = styled.div`
 function MusicPlay() {
   const nav = useNavigate();
   const location = useLocation();
-  const { songId, melody } = location.state || {};
+  const { songId } = useParams();
+  const { melody } = location.state || {};
   
   return (
     <MusicPlayDiv>

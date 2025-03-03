@@ -44,10 +44,9 @@ const CreatedSparkle = styled(Sparkle)`
 function Loading() {
   const [sparkles, setSparkles] = useState([]);
   
-  const location = useLocation();
   const nav = useNavigate();
+  const location = useLocation();
   const { nickname, birth, starNum } = location.state || {};
-
 
   const generateAndSaveMelody = useCallback(async () => {
     try {
@@ -63,7 +62,7 @@ function Loading() {
       }
 
       // Music 페이지로 이동 (멜로디 데이터 전달)
-    nav("/music", { state: { songId: String(songId), nickname, melody: JSON.stringify(melody) } });
+        nav("/music/${songId}", { state: { nickname, melody: JSON.stringify(melody) } });
     } catch (error) {
       console.error(error);
       alert("오류가 발생했습니다.");

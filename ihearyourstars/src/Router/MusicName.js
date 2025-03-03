@@ -24,6 +24,8 @@ function MusicName() {
   const [musicboxName, setMusicboxName] = useState("가빈의 별들");
 
   const nav = useNavigate();
+  const location = useLocation();
+  const { songId } = useParams();
 
   const handleChange = (e) => {
     setMusicboxName(e.target.value);
@@ -36,7 +38,7 @@ function MusicName() {
       return;
     }
 
-    nav("/music/share");
+    nav("/music/share/${songId}", { state: { musicboxName } });
   };
 
   return (

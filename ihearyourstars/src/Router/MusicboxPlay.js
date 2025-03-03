@@ -7,6 +7,8 @@ import { ReactComponent as Star2 } from "../img/MusicBox/Star2.svg";
 function MusicboxPlay() {
   const musicTitle = "집에가고싶다";
   const [rotationSpeed, setRotationSpeed] = useState (0);
+  const { songId } = useParams();
+  const { title, melody } = location.state || {};
 
   return (
     <MusicboxPlayDiv>
