@@ -8,6 +8,11 @@ const LoadingDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: white;
+  span {
+    margin-top: 50px;
+    font-size: 15px;
+  }
 `;
 
 const SparklesWrapper = styled.div`
@@ -64,6 +69,7 @@ function Loading() {
       <LoadingDiv>
         <h1>나의 오르골을</h1>
         <h1>만드는 중이에요</h1>
+        <span>기다리는 동안 화면을 터치해보세요</span>
       </LoadingDiv>
       <SparklesWrapper onMouseUp={handleMouseUp}>
         {sparkles.map((sparkle, index) => (
