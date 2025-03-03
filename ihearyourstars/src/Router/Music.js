@@ -33,6 +33,9 @@ const MusicBoxBg = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
 `;
 
 const CircleBg = styled(Circle)`
