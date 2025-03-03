@@ -31,7 +31,7 @@ export async function fetchSongById(song_id) {
 
     const { data, error } = await supabase
         .from("songs")
-        .select("*")
+        .select("nickname, title, notes")
         .eq("song_id", song_id)
         .single();
 
@@ -40,5 +40,5 @@ export async function fetchSongById(song_id) {
         return null;
     }
 
-    return data;
+    return data; // { nickname, title, notes }
 }

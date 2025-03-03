@@ -9,7 +9,7 @@ function MusicShare() {
 
   const nav = useNavigate();
   const location = useLocation();
-  const { musicTitle } = location.state || {};
+  const { title } = location.state || {};
   const { songId } = useParams();
 
   const handleCopyLink = async () => {
@@ -33,7 +33,7 @@ function MusicShare() {
     <MusicShareDiv>
       <Contents>
         <Title>
-          <h1>{musicTitle}를</h1>
+          <h1>{title}를</h1>
           <h1>간직하세요</h1>
         </Title>
         <MusicBoxDiv>

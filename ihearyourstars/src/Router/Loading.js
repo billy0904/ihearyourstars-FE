@@ -2,7 +2,6 @@ import styled, { keyframes } from "styled-components";
 import { ReactComponent as Sparkle } from "../img/Sparkle.svg";
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import { generateOrgelMelody } from "../utils/OrgelMusicGenerator";
 
 const LoadingDiv = styled.div`
