@@ -42,7 +42,7 @@ export async function generateOrgelMelody(nickname, birth, starNum) {
     
     // Supabase에 저장
     const title = `${nickname}의 별들`;
-    const songId = saveOrgelMelody(nickname, birth, starNum, melody, title);
+    const songId = await saveOrgelMelody(nickname, birth, starNum, melody, title);
     if (!songId) {
         throw new Error("저장 실패");
     }
