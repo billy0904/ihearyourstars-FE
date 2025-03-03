@@ -2,7 +2,8 @@ import styled, { keyframes } from "styled-components";
 import Button from "../components/Button";
 import { ReactComponent as Musicbox1 } from "../img/share/share_musicbox1.svg";
 import { ReactComponent as Star } from "../img/MusicBox/musicbox_star.svg"
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, } from "react";
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { fetchSongById } from "../services/SupabaseService"; 
 
 function Musicbox() {

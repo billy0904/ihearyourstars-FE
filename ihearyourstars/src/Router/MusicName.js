@@ -25,6 +25,7 @@ function MusicName() {
 
   const nav = useNavigate();
   const location = useLocation();
+  const { nickname } = location.state || {};
   const { songId } = useParams();
 
   const handleChange = (e) => {
