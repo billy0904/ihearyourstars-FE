@@ -33,16 +33,16 @@ function MusicName() {
     setTitle(e.target.value);
   };
 
-  const handleSubmit = async () => {
-    // 유효성 검사
-    if (!title) {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // 폼 자동 제출 방지
+    
+    if (!title.trim()) {
       alert("오르골에 이름을 붙여주세요.");
       return;
     }
   
     // 제목 변경
     await updateSongTitle(songId, title);
-    
     nav(`/music/share/${songId}`, { state: { title } });
   };
   
