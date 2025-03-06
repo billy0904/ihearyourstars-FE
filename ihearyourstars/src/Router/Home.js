@@ -1,18 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import StyledForm from "../components/Form";
+import Line from "../components/Line";
 import logo from "../img/common/logo.png";
 import styled from "styled-components";
-import line from "../img/form/line.png";
-import bgEffect from "../img/bgEffect.png";
+import { ReactComponent as CircleBg } from "../img/common/circle_bg.svg";
 import starIcon from "../img/form/star.png";
 import selectedStarIcon from "../img/form/selectedStar.png";
 
-const BgEffect = styled.img`
+const BgEffect = styled(CircleBg)`
   position: absolute;
-  top: -8%;
-  left: -20%;
-  width: 85%;
+  top: -5%;
+  left: -15%;
   z-index: 0;
   pointer-events: none;
 `;
@@ -31,14 +31,6 @@ const DescriptionDiv = styled.div`
     font-weight: 500;
     font-size: 14px;
   }
-`;
-
-const Line = styled.img`
-  width: 110%;
-  position: absolute;
-  top: 11%;
-  left: -11%;
-  pointer-events: none;
 `;
 
 const DateField = styled.select`
@@ -98,23 +90,40 @@ const StarsEffect = styled.img`
 `;
 
 function Home() {
+  const [nickname, setNickname] = useState("");
+  const [month, setMonth] = useState("");
+  const [day, setDay] = useState("");
   const [selectedStar, setSelectedStar] = useState(null);
 
   const starsData = [
-    { name: "베텔기우스", color: "#FFCBE4" },
-    { name: "시리우스", color: "#D5FBFF" },
-    { name: "폴라리스", color: "#ffffff" },
-    { name: "알타이르", color: "rgba(255, 226, 203)" },
-    { name: "베가", color: "#D0FFE4" },
+    { name: "Antares", color: "#FFCBE4" },
+    { name: "Sirius", color: "#D5FBFF" },
+    { name: "Polaris", color: "#ffffff" },
+    { name: "Capella", color: "rgba(255, 226, 203)" },
+    { name: "Vega", color: "#D0FFE4" },
   ];
 
   const handleStarClick = (star) => {
     setSelectedStar(star);
   };
 
+  const nav = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // 유효성 검사
+    if (!selectedStar) {
+      alert("마음에 드는 별을 골라주세요.");
+      return;
+    }
+
+    nav("/loading");
+  };
+
   return (
     <>
-      <BgEffect src={bgEffect} />
+      <BgEffect />
       <Logo src={logo} />
       <DescriptionDiv>
         <span>
@@ -124,21 +133,27 @@ function Home() {
         </span>
       </DescriptionDiv>
 
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
         <div>
           <span>닉네임</span>
           <input
+            value={nickname}
             placeholder="2~6자 이내"
             required
-            minLength={1}
-            maxLength={5}
+            minLength={2}
+            maxLength={6}
+            onChange={(e) => setNickname(e.target.value)}
           ></input>
-          <Line src={line}></Line>
+          <Line />
         </div>
 
         <div>
           <span>생일</span>
-          <DateField>
+          <DateField
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+            required
+          >
             <option value="" disabled>
               월
             </option>
@@ -148,7 +163,11 @@ function Home() {
               </option>
             ))}
           </DateField>
-          <DateField>
+          <DateField
+            value={day}
+            onChange={(e) => setDay(e.target.value)}
+            required
+          >
             <option value="" disabled>
               일
             </option>
@@ -158,12 +177,12 @@ function Home() {
               </option>
             ))}
           </DateField>
-          <Line src={line}></Line>
+          <Line />
         </div>
 
         <div>
           <span>마음에 드는 별을 골라주세요</span>
-          <Line src={line}></Line>
+          <Line />
         </div>
         <div>
           <StarsContainer>

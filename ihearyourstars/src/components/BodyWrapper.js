@@ -1,5 +1,16 @@
-import React from "react";
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
+
+const gradientAnimation = keyframes`
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+`;
 
 const BodyWrapper = styled.div`
   width: 100%;
@@ -10,6 +21,13 @@ const BodyWrapper = styled.div`
   text-align: center;
   padding: 50px;
   z-index: -1;
+
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      animation: ${gradientAnimation} 5s ease infinite;
+      background-size: 200% 200%;
+    `}
 `;
 
 export default BodyWrapper;

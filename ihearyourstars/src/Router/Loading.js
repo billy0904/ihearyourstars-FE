@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { ReactComponent as Sparkle } from "../img/Sparkle.svg";
+import { useState } from "react";
 
 const LoadingDiv = styled.div`
   height: 70vh;
@@ -6,22 +8,69 @@ const LoadingDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  span {
-    display: block;
-    width: 100%;
-    background-color: transparent;
-    color: white;
-    font-weight: 500;
-    font-size: 30px;
-  }
+`;
+
+const SparklesWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+`;
+
+const fadeAnimation = keyframes`
+  0% { opacity: 0; transform: scale(0.5); }
+  15% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(0.8); }
+`;
+
+const CreatedSparkle = styled(Sparkle)`
+  position: absolute;
+  left: ${(props) => props.x}px;
+  top: ${(props) => props.y}px;
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+  animation: ${fadeAnimation} 3s ease-out forwards;
 `;
 
 function Loading() {
+  const [sparkles, setSparkles] = useState([]);
+
+  const handleMouseUp = (e) => {
+    const newSparkle = {
+      x: e.clientX - 30,
+      y: e.clientY - 30,
+      createdAt: Date.now(),
+    };
+
+    setSparkles((prevSparkles) => {
+      const updatedSparkles = [...prevSparkles, newSparkle];
+
+      setTimeout(() => {
+        setSparkles((prev) => prev.filter((s) => s !== newSparkle));
+      }, 3000);
+
+      return updatedSparkles;
+    });
+  };
+
   return (
-    <LoadingDiv>
-      <span>나의 오르골을</span>
-      <span>만드는 중이에요</span>
-    </LoadingDiv>
+    <>
+      <LoadingDiv>
+        <h1>나의 오르골을</h1>
+        <h1>만드는 중이에요</h1>
+      </LoadingDiv>
+      <SparklesWrapper onMouseUp={handleMouseUp}>
+        {sparkles.map((sparkle, index) => (
+          <CreatedSparkle key={index} {...sparkle} />
+        ))}
+      </SparklesWrapper>
+    </>
   );
 }
 

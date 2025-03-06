@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom';
 
 function Musicbox() {
   const userName = "가빈";
-  const musicTitle = "집에가고싶다";
+  const musicTitle = "안녕하시렵니까별들";
   const songId = "12345";
 
   const nav = useNavigate();
 
   const handleNavigateHome = () => {
-    nav('/');
-  }
+    nav("/");
+  };
 
   const handleNavigatePlay = () => {
     nav('/musicbox/play');
@@ -56,11 +56,6 @@ const Title = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
-
-  color: white;
-  font-weight: 400;
-  line-height: 40px;
-  font-size: 32px;
 `;
 
 const blinkAnimation = keyframes`
@@ -70,7 +65,7 @@ const blinkAnimation = keyframes`
 `;
 
 const Text = styled.div`
-  color: rgba(0, 0, 0, 0.50);
+  color: rgba(0, 0, 0, 0.5);
   font-weight: 400;
   line-height: 20px;
   font-size: 15px;
@@ -84,7 +79,6 @@ const Contents = styled.div`
   align-items: center;
   gap: 47px;
   margin-bottom: 62px;
-
 `;
 
 const MusicBoxDiv = styled.div`
