@@ -6,7 +6,7 @@ import { ReactComponent as MusicboxTop } from "../img/MusicBox/Musicbox_top.svg"
 import { ReactComponent as MusicboxBottom } from "../img/MusicBox/Musicbox_bottom.svg";
 import { ReactComponent as Star } from "../img/MusicBox/Star.svg";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 const MusicDiv = styled.div`
   padding: 30px 0;
@@ -130,12 +130,17 @@ const FullScreenFade = styled.div`
 `;
 
 function Music() {
-  const nickname = "가빈";
   const [isClicked, setIsClicked] = useState(false);
   const [isScaled, setIsScaled] = useState(false);
   const [isFading, setIsFading] = useState(false);
 
   const nav = useNavigate();
+  const location = useLocation();
+  const { nickname, melody } = location.state || {};
+  const { songId } = useParams()
+
+  // melody를 JSON으로 파싱
+  const parsedMelody = melody ? JSON.parse(melody) : [];
 
   const handleClick = () => {
     setIsClicked(!isClicked);
@@ -146,7 +151,7 @@ function Music() {
     }, 400);
 
     setTimeout(() => {
-      nav("/music/play");
+      nav(`/music/play/${songId}`, { state: { nickname, melody } });
     }, 1000);
   };
 

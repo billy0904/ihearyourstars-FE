@@ -3,15 +3,18 @@ import React, { useState } from 'react';
 import { MusicBoxComponent } from '../components/MusicBoxComponent';
 import { ReactComponent as Star1 } from "../img/MusicBox/Star1.svg";
 import { ReactComponent as Star2 } from "../img/MusicBox/Star2.svg";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 function MusicboxPlay() {
-  const musicTitle = "집에가고싶다";
   const [rotationSpeed, setRotationSpeed] = useState (0);
+  const location = useLocation();
+  const { title, melody } = location.state || {};
+  const { songId } = useParams();
 
   return (
     <MusicboxPlayDiv>
       <Title>
-        <h1>♪ {musicTitle}</h1>
+        <h1>♪ {title}</h1>
       </Title>
       <span>손잡이를 돌려 음악을 재생해보세요</span>
       <Notes rotationSpeed={rotationSpeed} />
