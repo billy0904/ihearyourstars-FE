@@ -1,37 +1,21 @@
-const RhythmPatterns = {
-    aries:   ["A", "B", "C", "D", "B", "A"],
-    taurus:  ["B", "D", "A", "C", "D", "B"],
-    gemini:  ["C", "A", "B", "D", "A", "C"],
-    cancer:  ["D", "B", "C", "A", "B", "D"],
-    leo:     ["A", "C", "D", "B", "C", "A"],
-    virgo:   ["B", "A", "D", "C", "A", "B"],
-    libra:   ["C", "D", "B", "A", "D", "C"],
-    scorpio: ["D", "C", "A", "B", "C", "D"],
-    sagittarius: ["A", "D", "C", "B", "D", "A"],
-    capricorn: ["B", "C", "D", "A", "C", "B"],
-    aquarius: ["C", "B", "A", "D", "B", "C"],
-    pisces:  ["D", "A", "B", "C", "A", "D"],
+// 별자리별 리듬 패턴 (각 마디에 A, B, C, D 패턴)
+const rhythmPatterns = {
+    aries: ['A', 'C', 'B', 'D', 'A', 'B', 'C', 'D'],
+    taurus: ['B', 'D', 'A', 'C', 'B', 'A', 'D', 'C'],
+    gemini: ['C', 'A', 'D', 'B', 'C', 'D', 'A', 'B'],
+    cancer: ['D', 'B', 'C', 'A', 'D', 'A', 'C', 'B'],
+    leo: ['A', 'B', 'D', 'C', 'A', 'D', 'C', 'B'],
+    virgo: ['C', 'D', 'A', 'B', 'D', 'A', 'C', 'B'],
+    libra: ['B', 'A', 'C', 'D', 'B', 'C', 'A', 'D'],
+    scorpio: ['D', 'C', 'B', 'A', 'D', 'A', 'C', 'B'],
+    sagittarius: ['A', 'B', 'C', 'D', 'A', 'C', 'D', 'B'],
+    capricorn: ['C', 'D', 'B', 'A', 'C', 'A', 'B', 'D'],
+    aquarius: ['D', 'C', 'A', 'B', 'D', 'A', 'C', 'B'],
+    pisces: ['B', 'A', 'D', 'C', 'B', 'C', 'D', 'A']
 };
 
-// 별자리 기반 리듬 패턴 반환
-export function getRhythmPattern(birth) {
-    const zodiacSign = getZodiacSign(birth);
-    return RhythmPatterns[zodiacSign] || RhythmPatterns.aries;
-}
-
-// 🎵 리듬 패턴을 Tone.js 노트 길이로 변환
-export function convertRhythmPattern(pattern) {
-    const NoteDurations = {
-        A: ["4n."],  // 점4분음표 (dotted quarter note)
-        B: ["4n", "8n"],  // 4분음표 + 8분음표
-        C: ["8n", "4n"],  // 8분음표 + 4분음표
-        D: ["8n", "8n", "8n"],  // 8분음표 3개
-    };
-    return pattern.map((p) => NoteDurations[p] || ["8n", "8n", "8n"]); // 기본값 8분음 3개
-}
-
 // 실제 별자리 계산
-export function getZodiacSign(birth) {
+function getZodiacSign(birth) {
     const month = parseInt(birth.substring(0, 2));
     const day = parseInt(birth.substring(2, 4));
 
@@ -62,3 +46,20 @@ export function getZodiacSign(birth) {
     }
     return "aries"; // default (fallback)
 }
+
+// 별자리 기반 리듬 패턴 반환
+export function getRhythmPattern(birth) {
+    const zodiacSign = getZodiacSign(birth);
+    return rhythmPatterns[zodiacSign] || rhythmPatterns.aries;
+}
+
+// // 🎵 리듬 패턴을 Tone.js 노트 길이로 변환
+// export function convertRhythmPattern(pattern) {
+//     const NoteDurations = {
+//         A: ["4n."],  // 점4분음표 (dotted quarter note)
+//         B: ["4n", "8n"],  // 4분음표 + 8분음표
+//         C: ["8n", "4n"],  // 8분음표 + 4분음표
+//         D: ["8n", "8n", "8n"],  // 8분음표 3개
+//     };
+//     return pattern.map((p) => NoteDurations[p] || ["8n", "8n", "8n"]); // 기본값 8분음 3개
+// }

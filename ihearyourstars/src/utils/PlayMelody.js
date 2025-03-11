@@ -47,35 +47,34 @@ smoothBPMUpdate(); // BPM 스무딩 시작
 
 // 마우스 이벤트 리스너 등록
 // window.addEventListener("mousemove", updateBPM);
-
-// 멜로디 재생 함수 (Play 버튼을 눌렀을 때 처음부터 다시 시작 가능)
-export async function playMelody(melody, setNotesOnScreen) {
+export async function playMelody(melody, setNotesOnScreen, bpm = 120) {
     if (!melody || melody.length === 0) {
         alert("재생할 멜로디가 없습니다!");
         return;
     }
+    
     Tone.Transport.stop();
     Tone.Transport.cancel();
     Tone.context.resume();
     isPlaying = false;
 
     isPlaying = true;
-    currentMelody = melody;
     setNotesOnScreenRef = setNotesOnScreen;
     currentPlaybackTime = 0;
 
     await Tone.start();
 
-    const synth = new Tone.Synth({
+    const synth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "sine" },
         envelope: { attack: 0.01, decay: 0.1, sustain: 0.2, release: 0.3 }
     }).toDestination();
 
     setNotesOnScreen([]);
     let index = 0;
+    let beatDuration = Tone.Time("4n").toSeconds() * (60 / bpm); // 한 마디의 기본 단위 길이
     nextNoteTime = Tone.now();
 
-    function playNextNote(time) {
+    function playNextMeasure(time) {
         if (index >= melody.length) {
             Tone.Transport.stop();
             isPlaying = false;
@@ -84,25 +83,28 @@ export async function playMelody(melody, setNotesOnScreen) {
             return;
         }
 
-        const { note, duration } = melody[index];
-        const adjustedDurationInSeconds = Tone.Time(duration).toSeconds() * (100 / bpm);
+        const measure = melody[index];
+        let noteStartTime = time;
+        const noteDuration = beatDuration;
 
-        console.log(`Playing note: ${note}, Duration: ${duration} (Adjusted: ${adjustedDurationInSeconds}s), Start Time: ${time}, BPM: ${Math.round(bpm)}`);
-
-        synth.triggerAttackRelease(note, adjustedDurationInSeconds, time);
+        measure.forEach(note => {
+            if (note !== "-") {
+                synth.triggerAttackRelease(note, noteDuration, noteStartTime);
+            }
+            noteStartTime += noteDuration;
+        });
 
         Tone.Draw.schedule(() => {
-            setNotesOnScreen([{ symbol: "♪", x: `${Math.random() * 80 + 10}%`, duration: 2 }]);
+            setNotesOnScreen(measure.map(note => note !== "-" ? { symbol: "♪", x: `${Math.random() * 80 + 10}%`, duration: 2 } : null).filter(n => n));
         }, time);
 
         index++;
-        currentPlaybackTime = index * adjustedDurationInSeconds;
-
-        nextNoteTime = Tone.now() + adjustedDurationInSeconds;
-        Tone.Transport.scheduleOnce(playNextNote, nextNoteTime);
+        currentPlaybackTime += beatDuration * measure.length;
+        nextNoteTime = Tone.now() + (beatDuration * measure.length);
+        Tone.Transport.scheduleOnce(playNextMeasure, nextNoteTime);
     }
 
     nextNoteTime = Tone.now();
-    Tone.Transport.scheduleOnce(playNextNote, nextNoteTime);
+    Tone.Transport.scheduleOnce(playNextMeasure, nextNoteTime);
     Tone.Transport.start();
 }

@@ -2,8 +2,8 @@ import { supabase } from "../supabase";
 
 // 악보 저장 후 song_id 반환
 export async function saveOrgelMelody(nickname, birth, starNum, melody, title) {
-    if (!nickname || !birth || starNum < 1 || starNum > 5) {
-        alert("모든 정보를 입력하고 별은 1~5 범위 내에서 선택하세요.");
+    if (!nickname || !birth || starNum < 0 || starNum > 4) {
+        alert("모든 정보를 입력하고 별은 0~4 범위 내에서 선택하세요.");
         return null;
     }
 
