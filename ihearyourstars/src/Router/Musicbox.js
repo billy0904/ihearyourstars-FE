@@ -2,7 +2,8 @@ import styled, { keyframes } from "styled-components";
 import Button from "../components/Button";
 import { ReactComponent as Musicbox1 } from "../img/share/share_musicbox1.svg";
 import { ReactComponent as Star } from "../img/MusicBox/musicbox_star.svg"
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
+import useFetchSong from "../hooks/useFetchSong";
 
 function Musicbox() {
   const nav = useNavigate();
@@ -21,7 +22,7 @@ function Musicbox() {
       alert("멜로디 데이터를 불러오는 중입니다. 잠시 후 다시 시도하세요.");
       return;
     }
-    nav(`/musicbox/play/${songId}`, { state: { melody, nickname, title } });
+    nav(`/musicbox/play/${songId}`, { state: { title, nickname, melody } });
   };
   
   return (

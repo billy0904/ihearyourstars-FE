@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchSongById } from "../services/SupabaseService";
 
-const useFetchSong = (songId) => {
+export default function useFetchSong(songId) {
   const [melody, setMelody] = useState(null);
   const [nickname, setNickname] = useState("");
   const [title, setTitle] = useState("");
@@ -31,6 +31,4 @@ const useFetchSong = (songId) => {
   }, [songId]);
 
   return { melody, nickname, title, loading, error };
-};
-
-export default useFetchSong;
+}

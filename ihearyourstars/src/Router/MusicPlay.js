@@ -17,7 +17,7 @@ function MusicPlay() {
   // location.state가 없을 경우 리다이렉트
   useEffect(() => {
     if (!melody) {
-      nav(`/musicbox/${songId}`, { replace: true });
+      nav(`/music/${songId}`, { replace: true });
     }
   }, [nickname, melody, songId, nav]);
 

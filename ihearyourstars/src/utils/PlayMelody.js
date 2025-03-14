@@ -44,7 +44,7 @@ export async function playMelody(melody, bpm = 60) {
 function playNote(note, duration) {
     return new Promise((resolve) => {
         const player = new Audio();
-        player.src = `https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/music_box-mp3/${note[0]}4.mp3`;
+        player.src = `https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/music_box-mp3/${note}4.mp3`;
 
         player.onended = resolve; // 음이 끝난 후 resolve 호출 → 다음 음 재생 가능
         player.onerror = () => {

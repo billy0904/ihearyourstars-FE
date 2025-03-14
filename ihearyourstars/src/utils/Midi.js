@@ -28,13 +28,13 @@ function convertNicknameToNumbers(nickname) {
 
 // 화성 문자열에서 루트 음 추출 후, 해당 화성 삼화음 중 두 음을 반환 (닉네임 숫자로 결정)
 function getChordTones(chord, nickname) {
-    const match = chord.match(/^[A-G][#b]?/);
+    const match = chord.match(/^[A-G][sb]?/);
     if (!match) return { tone1: chord, tone2: chord };
     
-    const root = match[0];
+    const root = chord[0];
     const isMinor = chord.includes('m') && !chord.toLowerCase().includes('maj');
 
-    const chromatic = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    const chromatic = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
     let rootIndex = chromatic.indexOf(root);
     if (rootIndex === -1) rootIndex = 0;
 

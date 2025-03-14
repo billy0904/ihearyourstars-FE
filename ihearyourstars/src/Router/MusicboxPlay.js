@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import React, { useEffect,  } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MusicBoxComponent } from '../components/MusicBoxComponent';
 import { ReactComponent as Star1 } from "../img/MusicBox/Star1.svg";
 import { ReactComponent as Star2 } from "../img/MusicBox/Star2.svg";
@@ -10,22 +10,26 @@ function MusicboxPlay() {
   const [rotationSpeed, setRotationSpeed] =  (0);
   const nav = useNavigate();
   const location = useLocation();
-  const { title, melody } = location.state || {};
   const { songId } = useParams();
+  const { title, nickname, melody } = location.state || {};
   
   // location.state가 없을 경우 리다이렉트
-  useEffect(() => {
-    if (!title || !melody) {
-      nav(`/music/${songId}`, { replace: true });
-    }
-  }, [title, melody, songId, nav]);
+    useEffect(() => {
+      if (!melody) {
+        nav(`/musicbox/${songId}`, { replace: true });
+      }
+    }, [nickname, melody, songId, nav]);
   
-  useEffect(() => {
-    if (melody) {
-      playMelody(melody, () => {});
-    }
-  }, [melody]);
+    useEffect(() => {
+      if (!Array.isArray(melody)) {
+        console.error("❌ melody가 배열이 아닙니다!", melody);
+        return <p>노래 데이터를 불러오는 중 오류가 발생했습니다.</p>;
+      }
+      
+    }, [melody]);
 
+    // 버튼을 클릭해야 재생 가능하도록 수정
+  
   return (
     <MusicboxPlayDiv>
       <Title>
