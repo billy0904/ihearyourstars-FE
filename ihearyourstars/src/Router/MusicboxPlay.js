@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,  } from 'react';
 import { MusicBoxComponent } from '../components/MusicBoxComponent';
 import { ReactComponent as Star1 } from "../img/MusicBox/Star1.svg";
 import { ReactComponent as Star2 } from "../img/MusicBox/Star2.svg";
@@ -7,11 +7,19 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { playMelody } from "../utils/PlayMelody";
 
 function MusicboxPlay() {
-  const [rotationSpeed, setRotationSpeed] = useState (0);
+  const [rotationSpeed, setRotationSpeed] =  (0);
+  const nav = useNavigate();
   const location = useLocation();
   const { title, melody } = location.state || {};
   const { songId } = useParams();
-
+  
+  // location.state가 없을 경우 리다이렉트
+  useEffect(() => {
+    if (!title || !melody) {
+      nav(`/music/${songId}`, { replace: true });
+    }
+  }, [title, melody, songId, nav]);
+  
   useEffect(() => {
     if (melody) {
       playMelody(melody, () => {});

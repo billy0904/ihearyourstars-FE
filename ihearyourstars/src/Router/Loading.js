@@ -63,7 +63,7 @@ function Loading() {
           throw new Error("멜로디 생성 또는 저장 실패");
         }
 
-        nav(`/music/${songId}`, { state: { nickname, melody: JSON.stringify(melody) } });
+        nav(`/music/${songId}`, { state: { nickname, melody } });
       } catch (error) {
         console.error(error);
         alert("오류가 발생했습니다.");

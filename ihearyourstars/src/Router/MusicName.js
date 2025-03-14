@@ -22,10 +22,9 @@ const MusicboxWrapper = styled.div`
 `;
 
 function MusicName() {
-  const [title, setTitle] = useState("");
-
   const nav = useNavigate();
   const location = useLocation();
+  const [title, setTitle] = useState("");
   const { nickname } = location.state || {};
   const { songId } = useParams();
 

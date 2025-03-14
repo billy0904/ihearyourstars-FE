@@ -41,10 +41,9 @@ function getChordTones(chord, nickname) {
     // 기본 음정
     const thirdInterval = isMinor ? 3 : 4;
     const fifthInterval = 7;
-    const octave = '4'; // 옥타브
 
-    const thirdNote = chromatic[(rootIndex + thirdInterval) % 12] + octave;
-    const fifthNote = chromatic[(rootIndex + fifthInterval) % 12] + octave;
+    const thirdNote = chromatic[(rootIndex + thirdInterval) % 12];
+    const fifthNote = chromatic[(rootIndex + fifthInterval) % 12];
 
     // 닉네임을 기반으로 선택할 음 결정
     const [choice1, choice2] = convertNicknameToNumbers(nickname);
@@ -97,5 +96,6 @@ export async function generateFinalMelody(nickname, chords, rhythmPattern) {
     
         return [...group1Notes, ...group2Notes];
     });
+    console.log(finalMelody);
     return finalMelody;
 }
