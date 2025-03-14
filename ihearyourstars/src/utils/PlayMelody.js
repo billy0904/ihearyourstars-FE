@@ -29,10 +29,11 @@ export async function playMelody(melody, bpm = 60) {
         // 음을 순차적으로 재생 (한 음이 끝난 후 다음 음을 재생)
         for (let noteIndex = 0; noteIndex < chordGroup.length; noteIndex++) {
             if (chordGroup[noteIndex] != "-") {
-                await playNote(chordGroup[noteIndex], 100000); // 각 음을 재생 후 기다림
+                await playNote(chordGroup[noteIndex], 500); // 각 음을 재생 후 기다림
             } else {
-                await setTimeout(beatDuration * 10000 / 3);
+                await new Promise(resolve => setTimeout(resolve, 500)); // "-"이면 1초 동안 대기
             }
+            console.log(chordGroup[noteIndex]);
         }
 
         currentTime += 2 * beatDuration; // 각 마디(0.5마디 x 2)당 2박자 증가
@@ -41,10 +42,9 @@ export async function playMelody(melody, bpm = 60) {
 
 // **🎹 개별 음을 재생하는 함수 (재생이 끝날 때까지 대기)**
 function playNote(note, duration) {
-    console.log(note);
     return new Promise((resolve) => {
         const player = new Audio();
-        player.src = `https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/music_box-mp3/${note}4.mp3`;
+        player.src = `https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/music_box-mp3/${note[0]}4.mp3`;
 
         player.onended = resolve; // 음이 끝난 후 resolve 호출 → 다음 음 재생 가능
         player.onerror = () => {
@@ -57,6 +57,6 @@ function playNote(note, duration) {
         }, 0);
 
         // 일정 시간이 지나면 강제로 resolve (혹시 onended가 호출되지 않을 경우 대비)
-        setTimeout(resolve, duration * 1000);
+        setTimeout(resolve, duration);
     });
 }

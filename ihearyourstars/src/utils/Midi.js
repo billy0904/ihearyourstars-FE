@@ -56,7 +56,7 @@ function getChordTones(chord, nickname) {
 
 // 두 음 사이의 보강(패싱) 음 추출 (간단히 tone1에서 한 반음 올라간 음을 사용)
 function getPassingTone(tone1, tone2) {
-    const chromatic = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    const chromatic = ["C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs", "A", "As", "B"];
     const index1 = chromatic.indexOf(tone1);
     const index2 = chromatic.indexOf(tone2);
     if (index1 === -1 || index2 === -1) return tone1;
