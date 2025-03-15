@@ -1,8 +1,7 @@
-
-// 1. WebAudio 컨텍스트 생성
+// WebAudio 컨텍스트 생성
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-// 2. SoundFont 로드 (천공 오르골 timbre 사용)
+// SoundFont 로드 (천공 오르골 timbre 사용)
 async function loadSoundFont(instrument = 'music_box') {
     const response = await fetch(`https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/${instrument}-mp3.js`);
     const script = await response.text();
@@ -12,7 +11,7 @@ async function loadSoundFont(instrument = 'music_box') {
 export async function playMelody(melody, bpm = 60) {
     await loadSoundFont();
     
-    // 🔴 사용자 이벤트 이후에 실행되도록 수정
+    // 사용자 이벤트 이후에 실행됨
     if (audioContext.state === "suspended") {
         await audioContext.resume();
         console.log("🔊 AudioContext 활성화됨");
@@ -40,7 +39,7 @@ export async function playMelody(melody, bpm = 60) {
     }
 }
 
-// **🎹 개별 음을 재생하는 함수 (재생이 끝날 때까지 대기)**
+// 개별 음을 재생하는 함수 (재생이 끝날 때까지 대기)
 function playNote(note, duration) {
     return new Promise((resolve) => {
         const player = new Audio();

@@ -1,3 +1,5 @@
+const chromatic = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
+
 // 한글 초성 인덱스 추출 (가나다 순서상의 index)
 function getChoseong(char) {
     const code = char.charCodeAt(0) - 0xAC00;
@@ -34,7 +36,6 @@ function getChordTones(chord, nickname) {
     const root = chord[0];
     const isMinor = chord.includes('m') && !chord.toLowerCase().includes('maj');
 
-    const chromatic = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
     let rootIndex = chromatic.indexOf(root);
     if (rootIndex === -1) rootIndex = 0;
 
@@ -56,7 +57,6 @@ function getChordTones(chord, nickname) {
 
 // 두 음 사이의 보강(패싱) 음 추출 (간단히 tone1에서 한 반음 올라간 음을 사용)
 function getPassingTone(tone1, tone2) {
-    const chromatic = ["C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs", "A", "As", "B"];
     const index1 = chromatic.indexOf(tone1);
     const index2 = chromatic.indexOf(tone2);
     if (index1 === -1 || index2 === -1) return tone1;
