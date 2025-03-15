@@ -53,7 +53,7 @@ export function getRhythmPattern(birth) {
     return rhythmPatterns[zodiacSign] || rhythmPatterns.aries;
 }
 
-// // 🎵 리듬 패턴을 Tone.js 노트 길이로 변환
+// // 리듬 패턴을 Tone.js 노트 길이로 변환
 // export function convertRhythmPattern(pattern) {
 //     const NoteDurations = {
 //         A: ["4n."],  // 점4분음표 (dotted quarter note)

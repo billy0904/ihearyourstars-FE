@@ -10,21 +10,22 @@ const MusicPlayDiv = styled.div`
 function MusicPlay() {
   const nav = useNavigate();
   const location = useLocation();
-  const { songId } = useParams();
   const { nickname, melody } = location.state || {};
+  const { songId } = useParams();
   const [canPlay, setCanPlay] = useState(false);
 
-  // location.state가 없을 경우 리다이렉트
   useEffect(() => {
     if (!melody) {
       nav(`/music/${songId}`, { replace: true });
     }
   }, [nickname, melody, songId, nav]);
 
-  // 버튼을 클릭해야 재생 가능하도록 수정
+  // 버튼을 클릭해야 재생 가능
   const handlePlay = async () => {
-    setCanPlay(true); // 상태 변경 (사용자 액션 발생)
-    await playMelody(melody, () => {}); // 이제 안전하게 실행 가능
+    if (!canPlay) {
+      setCanPlay(true); // 상태 변경
+      await playMelody(melody, () => {});
+    }
   };
 
   return (
