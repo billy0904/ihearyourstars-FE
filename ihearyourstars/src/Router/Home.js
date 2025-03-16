@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Button from "../components/Button";
 import StyledForm from "../components/Form";
 import Line from "../components/Line";
@@ -113,13 +113,18 @@ function Home() {
     e.preventDefault();
 
     // 유효성 검사
-    if (!selectedStar) {
-      alert("마음에 드는 별을 골라주세요.");
+    if (!nickname || !month || !day || !selectedStar) {
+      alert("이름, 생일, 별을 올바르게 입력하세요!");
       return;
     }
-
-    nav("/loading");
+    
+    const birth = `${String(month).padStart(2, "0")}${String(day).padStart(2, "0")}`;
+    const starNum = starsData.findIndex((star) => star.name === selectedStar); // 0~4
+  
+    // Loading 페이지로 이동 (필요 데이터만 전달)
+    nav("/loading", { state: { nickname, birth, starNum } });
   };
+  
 
   return (
     <>

@@ -1,6 +1,8 @@
 import styled, { keyframes } from "styled-components";
 import { ReactComponent as Sparkle } from "../img/Sparkle.svg";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { generateOrgelMelody } from "../utils/OrgelMusicGenerator";
 
 const LoadingDiv = styled.div`
   height: 70vh;
@@ -40,6 +42,37 @@ const CreatedSparkle = styled(Sparkle)`
 
 function Loading() {
   const [sparkles, setSparkles] = useState([]);
+  
+  const hasRun = useRef(false); // 한 번만 실행되도록 막기
+  const nav = useNavigate();
+  const location = useLocation();
+  const { nickname, birth, starNum } = location.state || {};
+
+  useEffect(() => {
+    if (hasRun.current) return; // ✅ 두 번째 실행 방지
+    hasRun.current = true; // ✅ 첫 실행 이후 true로 변경
+
+    const generateAndSaveMelody = async () => {
+      try {
+        if (!nickname || !birth || !starNum) {
+          throw new Error("잘못된 접근입니다.");
+        }
+
+        const { melody, songId } = await generateOrgelMelody(nickname, birth, starNum);
+        if (!melody.length || !songId) {
+          throw new Error("멜로디 생성 또는 저장 실패");
+        }
+
+        nav(`/music/${songId}`, { state: { nickname, melody } });
+      } catch (error) {
+        console.error(error);
+        alert("오류가 발생했습니다.");
+        nav("/");
+      }
+    };
+
+    generateAndSaveMelody();
+  }, [nickname, birth, starNum, nav]);
 
   const handleMouseUp = (e) => {
     const newSparkle = {

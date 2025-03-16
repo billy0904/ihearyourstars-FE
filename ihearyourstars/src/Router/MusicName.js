@@ -4,7 +4,8 @@ import StyledForm from "../components/Form";
 import Line from "../components/Line";
 import { useState } from "react";
 import { ReactComponent as Musicbox } from "../img/MusicBox/Musicbox.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { updateSongTitle } from "../services/SupabaseService";
 
 const MusicNameDiv = styled.div`
   padding: 30px 0;
@@ -21,23 +22,29 @@ const MusicboxWrapper = styled.div`
 `;
 
 function MusicName() {
-  const [musicboxName, setMusicboxName] = useState("가빈의 별들");
-
   const nav = useNavigate();
+  const location = useLocation();
+  const [title, setTitle] = useState("");
+  const { nickname } = location.state || {};
+  const { songId } = useParams();
 
   const handleChange = (e) => {
-    setMusicboxName(e.target.value);
+    setTitle(e.target.value);
   };
 
-  const handleSubmit = () => {
-    // 유효성 검사
-    if (!musicboxName) {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // 폼 자동 제출 방지
+    
+    if (!title.trim()) {
       alert("오르골에 이름을 붙여주세요.");
       return;
     }
-
-    nav("/music/share");
+  
+    // 제목 변경
+    await updateSongTitle(songId, title);
+    nav(`/music/share/${songId}`, { state: { title } });
   };
+  
 
   return (
     <MusicNameDiv>
@@ -48,7 +55,7 @@ function MusicName() {
       </MusicboxWrapper>
       <StyledForm>
         <div>
-          <input value={musicboxName} onChange={handleChange} required></input>
+          <input value={title} onChange={handleChange} required></input>
           <Line />
         </div>
         <Button text="결정" onClick={handleSubmit}></Button>
