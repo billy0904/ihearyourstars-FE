@@ -139,9 +139,6 @@ function Music() {
   const { nickname, melody } = location.state || {};
   const { songId } = useParams()
 
-  // melody를 JSON으로 파싱
-  const parsedMelody = melody ? JSON.parse(melody) : [];
-
   const handleClick = () => {
     setIsClicked(!isClicked);
     setIsFading(!isFading);

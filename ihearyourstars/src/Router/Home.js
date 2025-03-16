@@ -119,7 +119,7 @@ function Home() {
     }
     
     const birth = `${String(month).padStart(2, "0")}${String(day).padStart(2, "0")}`;
-    const starNum = starsData.findIndex((star) => star.name === selectedStar) + 1;
+    const starNum = starsData.findIndex((star) => star.name === selectedStar); // 0~4
   
     // Loading 페이지로 이동 (필요 데이터만 전달)
     nav("/loading", { state: { nickname, birth, starNum } });

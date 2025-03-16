@@ -2,29 +2,16 @@ import styled, { keyframes } from "styled-components";
 import Button from "../components/Button";
 import { ReactComponent as Musicbox1 } from "../img/share/share_musicbox1.svg";
 import { ReactComponent as Star } from "../img/MusicBox/musicbox_star.svg"
-import { useState, useEffect, } from "react";
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import { fetchSongById } from "../services/SupabaseService"; 
+import { useNavigate, useParams } from "react-router-dom";
+import useFetchSong from "../hooks/useFetchSong";
 
 function Musicbox() {
   const nav = useNavigate();
-  const { songId } = useParams()
-  const [melody, setMelody] = useState(null);
-  const [nickname, setNickname] = useState("");
-  const [title, setTitle] = useState("");
+  const { songId } = useParams();
+  const { melody, nickname, title, loading, error } = useFetchSong(songId);
 
-  // Supabase에서 곡 데이터 가져오기
-  useEffect(() => {
-    const fetchMelody = async () => {
-      const songData = await fetchSongById(songId);
-      if (songData) {
-        setMelody(songData.notes);
-        setNickname(songData.nickname);
-        setTitle(songData.title);
-      }
-    };
-    fetchMelody();
-  }, [songId]);
+  if (loading) return <p>로딩 중...</p>;
+  if (error) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
 
   const handleNavigateHome = () => {
     nav("/");
@@ -35,8 +22,7 @@ function Musicbox() {
       alert("멜로디 데이터를 불러오는 중입니다. 잠시 후 다시 시도하세요.");
       return;
     }
-
-    nav(`/musicbox/play/${songId}`, { state: { melody, nickname, title } });
+    nav(`/musicbox/play/${songId}`, { state: { title, nickname, melody } });
   };
   
   return (
