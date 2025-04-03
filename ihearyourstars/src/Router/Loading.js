@@ -1,6 +1,10 @@
 import styled, { keyframes } from "styled-components";
 import { ReactComponent as Sparkle } from "../img/Sparkle.svg";
 import { useState } from "react";
+import tapSound1 from "../audio/touch1.wav";
+import tapSound2 from "../audio/touch2.wav";
+import tapSound3 from "../audio/touch3.wav";
+import tapSound4 from "../audio/touch4.wav";
 
 const LoadingDiv = styled.div`
   height: 70vh;
@@ -45,8 +49,13 @@ const CreatedSparkle = styled(Sparkle)`
 
 function Loading() {
   const [sparkles, setSparkles] = useState([]);
+  const tapSounds = [tapSound1, tapSound2, tapSound3, tapSound4];
 
   const handleMouseUp = (e) => {
+    const randomSound = tapSounds[Math.floor(Math.random() * tapSounds.length)];
+    const audio = new Audio(randomSound);
+    audio.play().catch((error) => console.error("Audio play failed", error));
+
     const newSparkle = {
       x: e.clientX - 30,
       y: e.clientY - 30,
