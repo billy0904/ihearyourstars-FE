@@ -5,7 +5,7 @@ import { ReactComponent as Handle } from "../img/MusicBox/musicbox_handle.svg"
 import { ReactComponent as CloudFront } from "../img/MusicBox/cloud_front.svg"
 import { ReactComponent as CloudBack } from "../img/MusicBox/cloud_back.svg"
 
-export const MusicBoxComponent = () => {
+export const MusicBoxComponent = ({ onRotate }) => {
 
     const [rotation, setRotation] = useState(0);
     const handleRef = useRef(null);
@@ -15,6 +15,7 @@ export const MusicBoxComponent = () => {
     const handleMouseDown = (event) => {
         isDragging.current = true;
         lastAngle.current = getMouseAngle(event);
+    
         document.addEventListener("mousemove", handleMouseMove);
         document.addEventListener("mouseup", handleMouseUp);
     };
@@ -25,7 +26,12 @@ export const MusicBoxComponent = () => {
         const newAngle = getMouseAngle(event);
         const angleDiff = newAngle - lastAngle.current;
     
-        setRotation((prevRotation) => prevRotation + angleDiff);
+        setRotation((prevRotation) => {
+        const updated = prevRotation + angleDiff;
+          if (onRotate) onRotate(updated); // 회전량 전달
+        return updated;
+        });
+    
         lastAngle.current = newAngle;
     };
     
