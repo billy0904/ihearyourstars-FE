@@ -1,10 +1,11 @@
 import styled, { keyframes } from "styled-components";
 import React, { useState, useRef } from 'react';
 import { ReactComponent as Body } from "../img/MusicBox/musicbox_play.svg"
-import { ReactComponent as Star } from "../img/MusicBox/musicbox_star.svg"
 import { ReactComponent as Handle } from "../img/MusicBox/musicbox_handle.svg"
+import { ReactComponent as CloudFront } from "../img/MusicBox/cloud_front.svg"
+import { ReactComponent as CloudBack } from "../img/MusicBox/cloud_back.svg"
 
-export const MusicBoxComponent = () => {
+export const MusicBoxComponent = ({ onRotate }) => {
 
     const [rotation, setRotation] = useState(0);
     const handleRef = useRef(null);
@@ -14,6 +15,7 @@ export const MusicBoxComponent = () => {
     const handleMouseDown = (event) => {
         isDragging.current = true;
         lastAngle.current = getMouseAngle(event);
+    
         document.addEventListener("mousemove", handleMouseMove);
         document.addEventListener("mouseup", handleMouseUp);
     };
@@ -24,7 +26,12 @@ export const MusicBoxComponent = () => {
         const newAngle = getMouseAngle(event);
         const angleDiff = newAngle - lastAngle.current;
     
-        setRotation((prevRotation) => prevRotation + angleDiff);
+        setRotation((prevRotation) => {
+        const updated = prevRotation + angleDiff;
+          if (onRotate) onRotate(updated); // 회전량 전달
+        return updated;
+        });
+    
         lastAngle.current = newAngle;
     };
     
@@ -48,9 +55,12 @@ export const MusicBoxComponent = () => {
     return (
         <div>
             <MusicBoxDiv>
-                <StarDiv>
-                    <Star />
-                </StarDiv>
+                <CloudFrontDiv>
+                    <CloudFront />
+                </CloudFrontDiv>
+                <CloudBackDiv>
+                    <CloudBack />
+                </CloudBackDiv>
                 <HandleDiv
                     ref={handleRef}
                     onMouseDown={handleMouseDown}
@@ -58,7 +68,9 @@ export const MusicBoxComponent = () => {
                 >
                     <Handle />
                 </HandleDiv>
-                <Body />
+                <BodyDiv>
+                    <Body />
+                </BodyDiv>
                 </MusicBoxDiv>
         </div>
     )
@@ -76,10 +88,22 @@ const floatAnimation = keyframes`
     100% { transform: translateY(0); }
 `;
 
-const StarDiv = styled.div`
+const CloudFrontDiv = styled.div`
     position: absolute;
-    top: -16%;
-    left: 23%;
+    bottom: -15%;
+    right: 0%;
+    z-index: 3;
+    animation: ${floatAnimation} 3s infinite ease-in-out;
+`;
+
+const BodyDiv = styled.div`
+    position: relative;
+    z-index: 2;
+`;
+
+const CloudBackDiv = styled.div`
+    position: absolute;
+    bottom: 25%;
     z-index: 1;
     animation: ${floatAnimation} 3s infinite ease-in-out;
 `;
@@ -87,9 +111,9 @@ const StarDiv = styled.div`
 const HandleDiv = styled.div`
     position: absolute;
     top: 55%;
-    left: 44%;
-    z-index: 2;
+    left: 48%;
+    z-index: 4;
     cursor: grab;
     user-select: none;
-    transform-origin: left center;
+    transform-origin: left;
 `;

@@ -1,11 +1,13 @@
 // WebAudio 컨텍스트 생성
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let soundFontLoaded = false;
 
 // SoundFont 로드 (천공 오르골 timbre 사용)
-async function loadSoundFont(instrument = 'music_box') {
+export async function loadSoundFont(instrument = 'music_box') {
     const response = await fetch(`https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/${instrument}-mp3.js`);
     const script = await response.text();
     eval(script); // SoundFont 데이터를 실행하여 사용할 수 있도록 설정
+    soundFontLoaded = true;
 }
 
 export async function playMelody(melody, bpm = 60) {
@@ -40,7 +42,7 @@ export async function playMelody(melody, bpm = 60) {
 }
 
 // 개별 음을 재생하는 함수 (재생이 끝날 때까지 대기)
-function playNote(note, duration) {
+export function playNote(note, duration) {
     return new Promise((resolve) => {
         const player = new Audio();
         player.src = `https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/music_box-mp3/${note}4.mp3`;
