@@ -1,6 +1,5 @@
 import styled, { keyframes } from "styled-components";
 import { ReactComponent as Sparkle } from "../img/Sparkle.svg";
-import { useState } from "react";
 import tapSound1 from "../audio/touch1.wav";
 import tapSound2 from "../audio/touch2.wav";
 import tapSound3 from "../audio/touch3.wav";
