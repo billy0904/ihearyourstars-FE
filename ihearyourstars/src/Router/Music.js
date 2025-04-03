@@ -142,7 +142,7 @@ function Music() {
     }, 350);
 
     setTimeout(() => {
-      nav(`/music/play/${songId}`, { state: { nickname, melody } });
+      nav(`/musicbox/play/${songId}`, { state: { nickname, melody } });
     }, 1000);
   };
 

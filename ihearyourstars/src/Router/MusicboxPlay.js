@@ -1,31 +1,15 @@
 import styled, { keyframes } from "styled-components";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { MusicBoxComponent } from '../components/MusicBoxComponent';
 import { ReactComponent as Star1 } from "../img/MusicBox/Star1.svg";
 import { ReactComponent as Star2 } from "../img/MusicBox/Star2.svg";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import { playMelody } from "../utils/PlayMelody";
+import { loadSoundFont, playNote } from "../utils/PlayMelody";
 
 function MusicboxPlay() {
-  const [rotationSpeed, setRotationSpeed] = useState(0);
-  const nav = useNavigate();
+
   const location = useLocation();
-  const { songId } = useParams();
-  const { title, nickname, melody } = location.state || {};
-  const [canPlay, setCanPlay] = useState(false);
-  
-  useEffect(() => {
-    if (!melody) {
-      nav(`/musicbox/${songId}`, { replace: true });
-    }
-  }, [nickname, melody, songId, nav]);
-    
-  const handlePlay = async () => {
-    if (!canPlay) {
-      setCanPlay(true); // 상태 변경
-      await playMelody(melody, () => {});
-    }
-  };
+  const { title } = location.state || {};
     
   return (
     <MusicboxPlayDiv>
@@ -33,9 +17,9 @@ function MusicboxPlay() {
         <h1>♪ {title}</h1>
       </Title>
       <span>손잡이를 돌려 음악을 재생해보세요</span>
-      <button onClick={handlePlay}>음악 재생하기</button>
-      <Notes rotationSpeed={rotationSpeed} />
-      <MusicBoxComponent setRotationSpeed={setRotationSpeed} />
+      {/* <button onClick={handlePlay}>음악 재생하기</button> */}
+      {/* <Notes /> */}
+      <MusicBoxComponent />
     </MusicboxPlayDiv>
   );
 }
@@ -81,13 +65,11 @@ const Notes = ({ melody, rotationSpeed }) => {
   return (
     <NotesContainer>
       {melody && melody.map((note, index) => {
-        const RandomStar = Math.random() > 0.5 ? Star1 : Star2;
         const notePosition = notePositions[note] || Math.random() * 90 + 5; // 정의되지 않은 음은 랜덤 위치
         const animationDuration = 5 - Math.min(rotationSpeed / 100, 1.5);
 
         return (
           <FloatingStar key={index} left={notePosition} duration={animationDuration}>
-            <RandomStar />
           </FloatingStar>
         );
       })}
