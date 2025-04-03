@@ -7,56 +7,9 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { loadSoundFont, playNote } from "../utils/PlayMelody";
 
 function MusicboxPlay() {
-  const [rotationSpeed, setRotationSpeed] = useState(0);
-  const [noteIndex, setNoteIndex] = useState(0);
-  const isPlayingRef = useRef(false);
-  const intervalRef = useRef(null);
-  
-  const nav = useNavigate();
+
   const location = useLocation();
-  const { songId } = useParams();
-  const { title, nickname, melody } = location.state || {};
-
-  useEffect(() => {
-    if (!melody) {
-      nav(`/musicbox/${songId}`, { replace: true });
-    } else {
-      loadSoundFont(); // 미리 로드
-    }
-  }, [nickname, melody, songId, nav]);
-
-  // 손잡이를 돌릴 때 호출됨
-  const handleRotate = (speed) => {
-    setRotationSpeed(speed);
-
-    if (speed > 10) {
-      if (!intervalRef.current) {
-        intervalRef.current = setInterval(async () => {
-          if (isPlayingRef.current) return;
-          isPlayingRef.current = true;
-
-          const note = melody[noteIndex];
-          if (note && note !== "-") {
-            await playNote(note, 500);
-          } else {
-            await new Promise((res) => setTimeout(res, 500));
-          }
-
-          setNoteIndex((prev) => (prev + 1) % melody.length);
-          isPlayingRef.current = false;
-        }, Math.max(300, 1000 - speed * 10)); // 속도에 따라 간격 줄이기
-      }
-    } else {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      clearInterval(intervalRef.current);
-    };
-  }, []);
+  const { title } = location.state || {};
     
   return (
     <MusicboxPlayDiv>
@@ -65,8 +18,8 @@ function MusicboxPlay() {
       </Title>
       <span>손잡이를 돌려 음악을 재생해보세요</span>
       {/* <button onClick={handlePlay}>음악 재생하기</button> */}
-      <Notes melody={melody} rotationSpeed={rotationSpeed} />
-      <MusicBoxComponent onRotate={handleRotate} />
+      {/* <Notes /> */}
+      <MusicBoxComponent />
     </MusicboxPlayDiv>
   );
 }
