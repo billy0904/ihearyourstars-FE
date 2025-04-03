@@ -1,5 +1,9 @@
 import styled, { keyframes } from "styled-components";
 import { ReactComponent as Sparkle } from "../img/Sparkle.svg";
+import tapSound1 from "../audio/touch1.wav";
+import tapSound2 from "../audio/touch2.wav";
+import tapSound3 from "../audio/touch3.wav";
+import tapSound4 from "../audio/touch4.wav";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { generateOrgelMelody } from "../utils/OrgelMusicGenerator";
@@ -10,6 +14,11 @@ const LoadingDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: white;
+  span {
+    margin-top: 50px;
+    font-size: 15px;
+  }
 `;
 
 const SparklesWrapper = styled.div`
@@ -42,7 +51,8 @@ const CreatedSparkle = styled(Sparkle)`
 
 function Loading() {
   const [sparkles, setSparkles] = useState([]);
-  
+  const tapSounds = [tapSound1, tapSound2, tapSound3, tapSound4];
+
   const hasRun = useRef(false); // 한 번만 실행되도록 막기
   const nav = useNavigate();
   const location = useLocation();
@@ -58,7 +68,11 @@ function Loading() {
           throw new Error("잘못된 접근입니다.");
         }
 
-        const { melody, songId } = await generateOrgelMelody(nickname, birth, starNum);
+        const { melody, songId } = await generateOrgelMelody(
+          nickname,
+          birth,
+          starNum
+        );
         if (!melody.length || !songId) {
           throw new Error("멜로디 생성 또는 저장 실패");
         }
@@ -75,6 +89,10 @@ function Loading() {
   }, [nickname, birth, starNum, nav]);
 
   const handleMouseUp = (e) => {
+    const randomSound = tapSounds[Math.floor(Math.random() * tapSounds.length)];
+    const audio = new Audio(randomSound);
+    audio.play().catch((error) => console.error("Audio play failed", error));
+
     const newSparkle = {
       x: e.clientX - 30,
       y: e.clientY - 30,
@@ -97,6 +115,7 @@ function Loading() {
       <LoadingDiv>
         <h1>나의 오르골을</h1>
         <h1>만드는 중이에요</h1>
+        <span>기다리는 동안 화면을 터치해보세요</span>
       </LoadingDiv>
       <SparklesWrapper onMouseUp={handleMouseUp}>
         {sparkles.map((sparkle, index) => (
