@@ -64,7 +64,7 @@ function Loading() {
 
     const generateAndSaveMelody = async () => {
       try {
-        if (!nickname || !birth || !starNum) {
+        if (!nickname || !birth || starNum == undefined || starNum == null) {
           throw new Error("잘못된 접근입니다.");
         }
 
@@ -73,6 +73,8 @@ function Loading() {
           birth,
           starNum
         );
+
+        console.log('starNum', starNum);
         if (!melody.length || !songId) {
           throw new Error("멜로디 생성 또는 저장 실패");
         }

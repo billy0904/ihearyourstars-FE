@@ -6,11 +6,23 @@ const chordProgressions = {
       ['Am', 'F'], ['C', 'G7'],
       ['Em', 'Dm7'], ['G7', 'C']
     ],
+    sirius: [
+      ['Fsm', 'D'], ['Bm', 'Cs7'],
+      ['Csm', 'Fsm'], ['Gsm7b5', 'Cs7'],
+      ['D', 'Bm'], ['Fsm', 'Cs7'],
+      ['Csm', 'Gsm7b5'], ['Cs7', 'Fsm']
+    ],
     polaris: [
       ['A', 'Fsm'], ['D', 'E7'],
       ['Csm', 'Fsm'], ['Bm', 'E7'],
       ['Fsm', 'D'], ['A', 'E7'],
       ['Csm', 'Bm7'], ['E7', 'A']
+    ],
+    capella: [
+      ['Em', 'C'], ['Am', 'B7'],
+      ['Bm', 'Em'], ['Fsm7b5', 'B7'],
+      ['C', 'Am'], ['Em', 'B7'],
+      ['Bm', 'Fsm7b5'], ['B7', 'Em']
     ],
     vega: [
       ['F', 'Dm'], ['Bb', 'C7'],
@@ -18,24 +30,13 @@ const chordProgressions = {
       ['Dm', 'Bb'], ['F', 'C7'],
       ['Am', 'Gm7'], ['C7', 'F']
     ],
-    sirius: [
-      ['Fsm', 'D'], ['Bm', 'Cs7'],
-      ['Csm', 'Fsm'], ['Gsm7b5', 'Cs7'],
-      ['D', 'Bm'], ['Fsm', 'Cs7'],
-      ['Csm', 'Gsm7b5'], ['Cs7', 'Fsm']
-    ],
-    altair: [
-      ['Em', 'C'], ['Am', 'B7'],
-      ['Bm', 'Em'], ['Fsm7b5', 'B7'],
-      ['C', 'Am'], ['Em', 'B7'],
-      ['Bm', 'Fsm7b5'], ['B7', 'Em']
-    ]
   };
   
 
 // 코드 진행 패턴 반환
 export function getChordProgression(starNum) {
-    const colors = ["betelgeuse", "polaris", "vega", "sirius", "altair"];
+    const colors = ["antares", "sirius", "polaris", "capella", "vega"];
+    console.log("별 색상:", (starNum) % colors.length);
     const color = colors[(starNum) % colors.length];
     return chordProgressions[color] || chordProgressions.antares;
 }
