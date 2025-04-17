@@ -5,6 +5,7 @@ import { saveOrgelMelody } from "../services/SupabaseService";
 
 // 오르골 음악 생성
 export async function generateOrgelMelody(nickname, birth, starNum) {
+    console.log("starNum1", starNum);
     const chords = getChordProgression(starNum);
     const rhythmPattern = getRhythmPattern(birth);
     if (!chords || !rhythmPattern) {

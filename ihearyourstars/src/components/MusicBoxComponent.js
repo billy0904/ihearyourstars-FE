@@ -56,7 +56,7 @@ export const MusicBoxComponent = () => {
                 const positionIndex = notePositions[baseNote] ?? Math.floor(Math.random() * 12);
                 const leftPercent = (positionIndex / 12) * 100;
 
-                const isLong = DURATION > 500;
+                const isLong = Math.random() > 0.5;
                 const id = Date.now();
 
                 setFloatingNotes(prev => [...prev, { id, left: leftPercent, isLong }]);
@@ -230,7 +230,7 @@ const NotesOverlay = styled.div`
 
 const floatUp = keyframes`
     0% { transform: translateY(100%); opacity: 1; }
-    100% { transform: translateY(-500%); opacity: 0; }
+    100% { transform: translateY(-500%); opacity: 0.3; }
 `;
 
 const FloatingStar = styled.div`
