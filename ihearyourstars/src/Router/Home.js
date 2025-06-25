@@ -22,7 +22,10 @@ const Logo = styled.img`
 `;
 
 const DescriptionDiv = styled.div`
+  max-width: 450px;
+  margin: 0 auto;
   padding: 30px;
+
   span {
     display: block;
     width: 100%;
@@ -30,8 +33,10 @@ const DescriptionDiv = styled.div`
     color: white;
     font-weight: 500;
     font-size: 14px;
+    text-align: center;
   }
 `;
+
 
 const DateField = styled.select`
   padding: 10px;
