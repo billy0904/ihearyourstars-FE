@@ -22,7 +22,7 @@ const Logo = styled.img`
 `;
 
 const DescriptionDiv = styled.div`
-  max-width: 450px;
+  max-width: 480px;
   margin: 0 auto;
   padding: 30px;
 
@@ -137,9 +137,10 @@ function Home() {
       <Logo src={logo} />
       <DescriptionDiv>
         <span>
-          너별들은 이러이러한 서비스인데요 이천이십오년 이월 이십 이일부터
-          시작해서 이십팔일까지 진행한 프로젝트입니다 볼륨을 높여주세요 이어폰
-          착용 권장 최대 네 줄 정도 나오면 좋을 것 같은데 뭐라고 넣지
+          우리는 모두 각자의 별을 가지고 있습니다.<br />
+          소리를 통해 당신의 별자리를 감상해보세요.<br />
+          지금, 당신의 별이 들리는 순간입니다.<br /><br />
+          🔊 볼륨을 키워주세요 🔊
         </span>
       </DescriptionDiv>
 
