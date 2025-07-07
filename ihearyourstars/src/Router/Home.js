@@ -37,12 +37,12 @@ const DescriptionDiv = styled.div`
   }
 `;
 
-
 const DateField = styled.select`
   padding: 10px;
   margin: 10px;
   background-color: transparent;
   color: white;
+  width: 70px;
   & option {
     color: black;
   }
@@ -122,14 +122,16 @@ function Home() {
       alert("이름, 생일, 별을 올바르게 입력하세요!");
       return;
     }
-    
-    const birth = `${String(month).padStart(2, "0")}${String(day).padStart(2, "0")}`;
+
+    const birth = `${String(month).padStart(2, "0")}${String(day).padStart(
+      2,
+      "0"
+    )}`;
     const starNum = starsData.findIndex((star) => star.name === selectedStar); // 0~4
-  
+
     // Loading 페이지로 이동 (필요 데이터만 전달)
     nav("/loading", { state: { nickname, birth, starNum } });
   };
-  
 
   return (
     <>
@@ -137,9 +139,13 @@ function Home() {
       <Logo src={logo} />
       <DescriptionDiv>
         <span>
-          우리는 모두 각자의 별을 가지고 있습니다.<br />
-          소리를 통해 당신의 별자리를 감상해보세요.<br />
-          지금, 당신의 별이 들리는 순간입니다.<br /><br />
+          우리는 모두 각자의 별을 가지고 있습니다.
+          <br />
+          소리를 통해 당신의 별자리를 감상해보세요.
+          <br />
+          지금, 당신의 별이 들리는 순간입니다.
+          <br />
+          <br />
           🔊 볼륨을 키워주세요 🔊
         </span>
       </DescriptionDiv>
